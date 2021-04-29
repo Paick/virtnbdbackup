@@ -394,10 +394,9 @@ def backupDisk(diskTarget, args, lib, checkpointName,
             else:
                 if args.type == "raw":
                     writer.seek(save.offset)
-                writer.write(connection.pread(
-                    save.length,
-                    save.offset
-                ))
+                buf = connection.pread(save.length, save.offset)
+                writer.write(buf)
+                del buf
             if args.type == "stream":
                 writer.write(sparsestream.SparseStreamTypes().TERM)
 
