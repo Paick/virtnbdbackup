@@ -125,7 +125,9 @@ class Common(object):
             )
             if btype == "raw":
                 writer.seek(blockOffset)
-            writer.write(nbdCon.pread(blocklen, blockOffset))
+            buf = nbdCon.pread(blocklen, blockOffset)
+            writer.write(buf)
+            del buf
             blockOffset+=blocklen
 
     def zeroChunk(self, offset, length, maxRequestSize, nbdCon):
