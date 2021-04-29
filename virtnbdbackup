@@ -349,7 +349,7 @@ def backupDisk(diskTarget, args, lib, checkpointName,
         targetFilePartial = '%s.partial' % targetFile
         logging.info("Write data to target file: %s", targetFilePartial)
         try:
-            writer = open(targetFilePartial,'wb')
+            writer = open(targetFilePartial,'wb', buffering=0)
         except Exception as e:
             logging.error('Unable to open target file: %s', e)
             return
